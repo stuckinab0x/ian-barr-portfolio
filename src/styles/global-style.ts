@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
 
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: Urbanist, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
 
