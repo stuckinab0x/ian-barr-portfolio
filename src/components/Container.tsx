@@ -1,12 +1,16 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Bubble from './Bubble';
 import { throttle } from '../utils';
-import farmstead from '../images/farmstead-thumb.png';
 import Confetti from './Confetti';
+import ContentModal from './ContentModal';
+import projectData from '../data/project-data';
+import Project from '../models/project';
 
 const Container: FC = () => {
   const [mousePos, setMousePos] = useState<{ x: number, y: number }>({ x: 0, y: 0 });
+  const [currentContent, setCurrentContent] = useState<Project | null>(null);
+  const [currentBubbleOGSides, setCurrentBubbleOGSides] = useState<number[]>([]);
 
   useEffect(() => {
     const updateMouse = throttle(20, (event: MouseEvent) => { setMousePos({ x: event.pageX, y: event.pageY }); }, );
@@ -14,16 +18,19 @@ const Container: FC = () => {
     return () => document.removeEventListener('mousemove', updateMouse, true)
   }, []);
 
+  const openModal = useCallback((projectData: Project, clockWiseBubbleCoords: number[]) => {
+    setCurrentBubbleOGSides(clockWiseBubbleCoords);
+    setCurrentContent(projectData);
+  }, []);
+
   return (
     <ContainerMain>
       <h1>Ian Barr/Web Developer</h1>
-      <BubblesContainer>
-        <Bubble mouseX={ mousePos.x } mouseY={ mousePos.y } color='orange' image={ farmstead } title='CPF Historical Site' />
-        <Bubble mouseX={ mousePos.x } mouseY={ mousePos.y } color='aqua' title='DiscordSoundboardBot' />
-        <Bubble mouseX={ mousePos.x } mouseY={ mousePos.y } color='pink' title='Rockhearsal Manager' />
-        <Bubble mouseX={ mousePos.x } mouseY={ mousePos.y } color='lightgreen' />
-      </BubblesContainer>
-      <Confetti />
+      { !currentContent && <BubblesContainer>
+        { projectData.map(x => <Bubble key={ x.title } mouseX={ mousePos.x } mouseY={ mousePos.y }  project={ x } open={ (clockWiseBubbleCoords: number[]) => openModal(x, clockWiseBubbleCoords) } /> ) }
+      </BubblesContainer> }
+      <Confetti currentColor={ currentContent?.color } />
+      { currentContent && <ContentModal close={ () => setCurrentContent(null) } ogSides={ currentBubbleOGSides } projectData={ currentContent } mouseX={ mousePos.x } mouseY={ mousePos.y }  /> }
     </ContainerMain>
   );
 }; 
@@ -51,6 +58,10 @@ const BubblesContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   z-index: 10;
+
+  @media only screen and (max-width: 910px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export default Container;

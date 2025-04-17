@@ -1,15 +1,15 @@
-import { FC, useMemo, useRef } from 'react';
+import { FC, useCallback, useMemo, useRef } from 'react';
 import styled from 'styled-components';
+import Project from '../models/project';
 
 interface BubbleProps {
+  open: (clockWiseBubbleCoords: number[]) => void;
   mouseX: number;
   mouseY: number;
-  color: string;
-  image?: string;
-  title?: string;
+  project: Project;
 }
 
-const Bubble: FC<BubbleProps> = ({ mouseX, mouseY, color, image, title }) => {
+const Bubble: FC<BubbleProps> = ({ open, mouseX, mouseY, project: { color, image, title } }) => {
   const bubbleContainer = useRef<HTMLDivElement | null>(null);
 
   const highLightCoords = useMemo(() => {
@@ -20,15 +20,23 @@ const Bubble: FC<BubbleProps> = ({ mouseX, mouseY, color, image, title }) => {
     return [mouseY - bubbleDOMRect.top, mouseX - bubbleDOMRect.left];
   }, [bubbleContainer, mouseX, mouseY]);
 
+  const handleClick = useCallback(() => {  
+    const bubbleDOMRect = bubbleContainer?.current?.getBoundingClientRect();
+    if (!bubbleDOMRect)
+      return;
+    
+    open([bubbleDOMRect.top + 6, bubbleDOMRect.right + 20, bubbleDOMRect.bottom + 20, bubbleDOMRect.left + 6]);
+  }, [open]);
+
   return (
-    <BubbleMain ref={ bubbleContainer } $accent={ color }>
+    <BubbleMain ref={ bubbleContainer } $accent={ color } onClick={ handleClick }>
       <Center>
         { image && <img src={ image } alt='' /> }
         <h2>
           { title }
         </h2>
       </Center>
-      <Highlight $top={ highLightCoords[0] } $left={ highLightCoords[1] } $color={ color } />
+      <Highlight style={ { top: highLightCoords[0], left: highLightCoords[1] } } $color={ color } />
       <div />
     </BubbleMain>
   );
@@ -96,8 +104,6 @@ const Center = styled.div`
 `;
 
 interface HighlightStyleProps {
-  $top: number;
-  $left: number;
   $color: string;
 }
 
@@ -108,8 +114,6 @@ const Highlight = styled.div<HighlightStyleProps>`
   height: 2px;
   box-shadow: 0 0 200px 200px ${ props => props.$color };
   position: absolute;
-  top: ${ props => props.$top }px;
-  left: ${ props => props.$left }px
 `;
 
 export default Bubble;

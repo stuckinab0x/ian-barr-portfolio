@@ -1,21 +1,31 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
-const randoms: KeyedParticleProps[] = Array.from(Array(50).keys()).map(x => ({ id: x, $x: Math.floor(Math.random() * 100), $y: Math.floor(Math.random() * 100), $time: Math.floor(Math.random() * 10 + 20) }));
+const colors = ['orange', 'aqua', 'pink', 'lightgreen'];
+
+const getRandoms = (count: number): KeyedParticleProps[] => Array.from(Array(count).keys()).map(x => ({ id: x, x: Math.floor(Math.random() * 100), y: Math.floor(Math.random() * 100), $time: Math.floor(Math.random() * 10 + 20), $color: colors[Math.floor((x / count) / 0.25)] }));
+
+const randoms = getRandoms(150);
 
 interface ParticleProps {
-  $x: number;
-  $y: number;
   $time: number;
+  $color: string;
+  $activeColor?: string;
 }
 
 interface KeyedParticleProps extends ParticleProps {
   id: number;
+  x: number;
+  y: number;
 }
 
-const Confetti: FC = () => (
+interface ConfettiProps {
+  currentColor: string | undefined;
+}
+
+const Confetti: FC<ConfettiProps> = ({ currentColor }) => (
   <ConfettiMain>
-    { randoms.map(x => <Confett key={ x.id } $x={ x.$x } $y={ x.$y } $time={ x.$time }>
+    { randoms.map(x => <Confett key={ x.id } style={ { left: `${ x.x }%`, top: `${ x.y }%` } } $time={ x.$time } $color={ x.$color } $activeColor={ currentColor }>
       <div />
       <div />
       <div />
@@ -36,8 +46,6 @@ const Confett = styled.div<ParticleProps>`
   display: grid;
   grid-template-columns: 1fr 1fr;
   position: absolute;
-  top: ${ props => props.$y }%;
-  left: ${ props => props.$x }%;
   height: 90px;
   width: 90px;
   opacity: 0.2;
@@ -52,63 +60,52 @@ const Confett = styled.div<ParticleProps>`
     width: 60px;
     border-radius: 15px;
     content: '';
-    transition: opacity 0.2s, translate 1s linear;
+    transition: translate 0.6s linear, background-color 0.6s;
     pointer-events: none;
     position: absolute;
     top: 15px;
     left: 15px;
+    background-color: ${ props => props.$activeColor ? props.$activeColor : props.$color };
   }
 
   &:nth-child(4n) {
     animation: float1 ${ props => props.$time }s infinite linear;
-    &::after {
-      background-color: aqua;
-    }
   }
 
   &:nth-child(4n + 1) {
     animation: float2 ${ props => props.$time }s infinite linear;
-    &::after {
-      background-color: orange;
-    }
   }
 
   &:nth-child(4n + 2) {
     animation: float3 ${ props => props.$time }s infinite linear;
-    &::after {
-      background-color: pink;
-    }
   }
 
   &:nth-child(4n + 3) {
     animation: float3 ${ props => props.$time }s infinite linear;
-    &::after {
-      background-color: lightgreen;
-    }
   }
 
   &:has(:nth-child(1):hover) {
     &::after {
-      translate: 20px 20px;
+      translate: 40px 40px;
     }
   }
 
   &:has(:nth-child(2):hover) {
     &::after {
-      translate: -20px 20px;
+      translate: -40px 40px;
     }
   }
 
   &:has(:nth-child(3):hover) {
     &::after {
-      translate: 20px -20px;
+      translate: 40px -40px;
     }
   }
 
 
   &:has(:nth-child(4):hover) {
     &::after {
-      translate: -20px -20px;
+      translate: -40px -40px;
     }
   }
 
