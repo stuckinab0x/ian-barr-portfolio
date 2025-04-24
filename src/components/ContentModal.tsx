@@ -13,7 +13,7 @@ interface ContentModalProps {
   mouseY: number;
 }
 
-const ContentModal: FC<ContentModalProps> = ({ close, projectData: { title, color, image, techIcons, description, allTechs }, mouseX, mouseY }) => {
+const ContentModal: FC<ContentModalProps> = ({ close, projectData: { title, color, techIcons, description, allTechs, gallery }, mouseX, mouseY }) => {
   const contentContainer = useRef<HTMLDivElement | null>(null);
 
   const highLightCoords = useMemo(() => {
@@ -26,6 +26,7 @@ const ContentModal: FC<ContentModalProps> = ({ close, projectData: { title, colo
 
   return(
     <ModalMain>
+      <ModalClickBg onClick={ close } />
       <div ref={ contentContainer }>
         <Content $accent={ color }>
           <ContentSection>
@@ -44,7 +45,7 @@ const ContentModal: FC<ContentModalProps> = ({ close, projectData: { title, colo
             <p>All Tech: { allTechs.slice(0, -1).map(x => `${ x }, `) }{ allTechs[allTechs.length - 1] }.</p>
           </ContentSection>
           <ContentSection>
-            <img src={ image } />
+            <img src={ gallery[0] } />
           </ContentSection>
           <ScrollIndicator />
         </Content>
@@ -69,7 +70,7 @@ const ModalMain = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 100;
 
-  > div {
+  > div:last-child {
     position: fixed;
     background-color: ${ props => props.theme.colors.contentInnerA };
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
@@ -83,6 +84,12 @@ const ModalMain = styled.div`
     overflow: hidden;
     scrollbar-width: none;
   }
+`;
+
+const ModalClickBg = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
 `;
 
 interface ContentStyleProps {
@@ -118,6 +125,10 @@ const ContentSection = styled.div`
   background-color: ${ props => props.theme.colors.contentInnerB };
   padding: 12px 16px;
   margin: 4px 0;
+  
+  &:nth-child(3) {
+    flex-grow: 1;
+  }
 
   &:first-child {
     margin-top: -6px;

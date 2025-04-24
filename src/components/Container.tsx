@@ -6,11 +6,14 @@ import Confetti from './Confetti';
 import ContentModal from './ContentModal';
 import projectData from '../data/project-data';
 import Project from '../models/project';
+import HomeAboutButtons from './HomeAboutButtons';
+import About from './About';
 
 const Container: FC = () => {
   const [mousePos, setMousePos] = useState<{ x: number, y: number }>({ x: 0, y: 0 });
   const [currentContent, setCurrentContent] = useState<Project | null>(null);
   const [currentBubbleOGSides, setCurrentBubbleOGSides] = useState<number[]>([]);
+  const [showAbout, setShowAbout] = useState(false);
 
   useEffect(() => {
     const updateMouse = throttle(20, (event: MouseEvent) => { setMousePos({ x: event.pageX, y: event.pageY }); }, );
@@ -29,8 +32,10 @@ const Container: FC = () => {
       { !currentContent && <BubblesContainer>
         { projectData.map(x => <Bubble key={ x.title } mouseX={ mousePos.x } mouseY={ mousePos.y }  project={ x } open={ (clockWiseBubbleCoords: number[]) => openModal(x, clockWiseBubbleCoords) } /> ) }
       </BubblesContainer> }
-      <Confetti currentColor={ currentContent?.color } />
+      <Confetti currentColor={ showAbout ? 'white' : currentContent?.color } />
       { currentContent && <ContentModal close={ () => setCurrentContent(null) } ogSides={ currentBubbleOGSides } projectData={ currentContent } mouseX={ mousePos.x } mouseY={ mousePos.y }  /> }
+      <HomeAboutButtons mouseX={ mousePos.x } mouseY={ mousePos.y } openAbout={ () => setShowAbout(true) } />
+      { showAbout && <About mouseX={ mousePos.x } mouseY={ mousePos.y } close={ () => setShowAbout(false) } /> }
     </ContainerMain>
   );
 }; 

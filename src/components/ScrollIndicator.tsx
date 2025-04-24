@@ -23,8 +23,8 @@ const ScrollIndicatorMain = styled.div`
   pointer-events: none;
 
   > img {
-    width: 200px;
-    height: 80px;
+    width: 100px;
+    height: 40px;
     opacity: 0.5;
   }
 `;

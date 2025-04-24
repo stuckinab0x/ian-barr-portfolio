@@ -9,7 +9,7 @@ interface BubbleProps {
   project: Project;
 }
 
-const Bubble: FC<BubbleProps> = ({ open, mouseX, mouseY, project: { color, image, title } }) => {
+const Bubble: FC<BubbleProps> = ({ open, mouseX, mouseY, project: { color, thumb, title } }) => {
   const bubbleContainer = useRef<HTMLDivElement | null>(null);
 
   const highLightCoords = useMemo(() => {
@@ -31,7 +31,7 @@ const Bubble: FC<BubbleProps> = ({ open, mouseX, mouseY, project: { color, image
   return (
     <BubbleMain ref={ bubbleContainer } $accent={ color } onClick={ handleClick }>
       <Center>
-        { image && <img src={ image } alt='' /> }
+        { thumb && <img src={ thumb } alt='' /> }
         <h2>
           { title }
         </h2>
