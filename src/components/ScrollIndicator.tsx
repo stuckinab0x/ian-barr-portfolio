@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import scrollImage from '../images/icons/scrolldown.png';
+import scrollImage from '../images/scrolldown.png';
 
 const ScrollIndicator: FC = () => (
   <ScrollIndicatorMain>

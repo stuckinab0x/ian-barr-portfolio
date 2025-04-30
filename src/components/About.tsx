@@ -29,7 +29,7 @@ const About: FC<AboutProps> = ({ mouseX, mouseY, close }) => {
               <img src={ closeIcon } alt="" />
             </Close>
           </div>
-          <p>Ian is a Web Developer, Keyboard Teacher and Composer in southeastern PA. He currently handles all things Web Design/Dev related for Colonial Pennsylvania Farmstead, a living history organization in Delaware County, and has been teaching music with School of Rock for a decade. He graduated Magna Cum Laude from Westminster Choir College with a BM in Music/Theory Composition. Ian loves UI/UX design and creating apps that focus on QoL for users. As a teacher, he understands how .</p>
+          <p>Ian is a Web Developer, Keyboard Teacher and Composer in southeastern PA. He currently handles all things Web Design/Dev related for Colonial Pennsylvania Farmstead, a living history organization in Delaware County, and has been teaching music with School of Rock for a decade. UI/UX design and QoL for users is a major focus for Ian when creating apps—as a teacher, he knows the power of something that anyone can understand and start using just by looking at it. Ian graduated Magna Cum Laude from Westminster Choir College with a BM in Music/Theory Composition.</p>
           <p>Skills: Typescript/Javascript, React, HTML + CSS, Styled Components, GraphQL, REST, Git.</p>
           <p><a href='https//github.com/stuckinab0x'>https//github.com/stuckinab0x</a></p>
         </Content>
@@ -61,7 +61,7 @@ const AboutMain = styled.div`
   background-color: ${ props => props.theme.colors.contentInnerA };
   padding: 6px;
   width: 1000px;
-  height: 700px;
+  height: 600px;
   overflow: hidden;
   position: relative;
   border-radius: 4px;

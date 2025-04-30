@@ -4,6 +4,7 @@ import Project from '../models/project';
 import techIconImages from '../data/tech-icons';
 import closeIcon from '../images/icons/close-dark-grey.png';
 import ScrollIndicator from './ScrollIndicator';
+import Gallery from './Gallery';
 
 interface ContentModalProps {
   projectData: Project;
@@ -45,7 +46,7 @@ const ContentModal: FC<ContentModalProps> = ({ close, projectData: { title, colo
             <p>All Tech: { allTechs.slice(0, -1).map(x => `${ x }, `) }{ allTechs[allTechs.length - 1] }.</p>
           </ContentSection>
           <ContentSection>
-            <img src={ gallery[0] } />
+            <Gallery images={ gallery } />
           </ContentSection>
           <ScrollIndicator />
         </Content>
@@ -193,8 +194,8 @@ const TechIcons = styled.div<ContentStyleProps>`
 
   > img {
     margin: 4px;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
   }
 `;

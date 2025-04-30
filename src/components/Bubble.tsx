@@ -80,7 +80,7 @@ const Center = styled.div`
     margin: 0;
     z-index: 10;
     font-size: 1.8rem;
-    opacity: 0.4;
+    opacity: 0.2;
   }
 
   > img {
