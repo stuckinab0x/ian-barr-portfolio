@@ -40,6 +40,12 @@ const ConfettiMain = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
+
+  @media only screen and (max-width: 900px) {
+    width: 900px;
+    left: auto;
+    right: auto;
+  }
 `;
 
 const Confett = styled.div<ParticleProps>`

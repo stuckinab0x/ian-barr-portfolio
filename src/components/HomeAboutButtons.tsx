@@ -83,6 +83,28 @@ const AboutContainerMain = styled.div`
     background-color: white;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
   }
+
+  @media only screen and (max-width: 500px) {
+    width: 80vw;
+    box-sizing: border-box;
+
+    > h2 {
+      font-size: 1.4rem;
+    }
+
+    > span {
+      height: 30px;
+    }
+
+    > a {
+      height: 30px;
+      
+      img {
+        height: 30px;
+        width: 30px;
+      }
+    }
+  }
 `;
 
 interface HighlightStyleProps {

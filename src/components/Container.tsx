@@ -65,6 +65,10 @@ const ContainerMain = styled.div`
     @media only screen and (max-width: 910px) {
       max-width: 800px;
     }
+
+    @media only screen and (max-width: 500px) {
+      font-size: 12vw;
+    }
   }
 `;
 

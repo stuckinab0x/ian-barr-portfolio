@@ -128,6 +128,13 @@ const Content = styled.div`
       word-wrap: break-word;
     }
   }
+
+  @media only screen and (max-width: 550px) {
+    > p {
+      font-size: 1.2rem;
+      line-height: 1.4rem;
+    }
+  }
 `;
 
 const Close = styled.div`

@@ -26,14 +26,17 @@ const ImageThumb = styled.div`
   overflow: hidden;
   margin: 4px;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
-  max-height: 400px;
   max-width: max-content;
+  max-height: 500px;
   background-color: black;
 
   > img {
-    height: 100%;
+    object-position: top;
+    object-fit: cover;
+    max-width: 100%;
     opacity: 0.9;
     user-select: none;
+    max-height: 500px;
 
     &:hover {
       opacity: 1;

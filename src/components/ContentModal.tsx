@@ -160,6 +160,12 @@ const ContentSection = styled.div`
     margin: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
   }
+
+  @media only screen and (max-width: 550px) {
+    p {
+      font-size: 1.2rem;
+    }
+  }
 `;
 
 const TitleAndClose = styled.div`
@@ -181,6 +187,18 @@ const TitleAndClose = styled.div`
     }
 
     flex-direction: column;
+  }
+
+  @media only screen and (max-width: 600px) {
+    h1 {
+      font-size: 2rem;
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
+    h1 {
+      font-size: 1.5rem;
+    }
   }
 `;
 
@@ -251,6 +269,11 @@ const TechIcons = styled.div<ContentStyleProps>`
     @media only screen and (max-width: 880px) {
       width: 35px;
       height: 35px;
+    }
+
+    @media only screen and (max-width: 550px) {
+      width: 25px;
+      height: 25px;
     }
   }
 `;

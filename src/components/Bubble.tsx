@@ -61,6 +61,11 @@ const BubbleMain = styled.div<BubbleMainStyleProps>`
   overflow: hidden;
   position: relative;
   cursor: pointer;
+
+  @media only screen and (max-width: 500px) {
+    width: 80vw;
+    height: 40vw;
+  }
 `;
 
 const Center = styled.div`
@@ -97,6 +102,19 @@ const Center = styled.div`
       opacity: 0.5;
     }
 
+    > h2 {
+      opacity: 1;
+    }
+  }
+
+  @media only screen and (max-width: 460px) {
+    > h2 {
+      font-size: 1.2rem;
+      opacity: 1;
+    }
+  }
+
+  @media only screen and (hover: none) and (pointer: coarse){
     > h2 {
       opacity: 1;
     }
