@@ -20,35 +20,48 @@ const About: FC<AboutProps> = ({ mouseX, mouseY, close }) => {
       }, [aboutMain, mouseX, mouseY]);
 
   return (
-    <AboutContainer>
-      <AboutMain ref={ aboutMain }>
-        <Content>
-          <div>
-            <h1>About</h1>
-            <Close onClick={ close }>
-              <img src={ closeIcon } alt="" />
-            </Close>
-          </div>
-          <p>Ian is a Web Developer, Keyboard Teacher and Composer in southeastern PA. He currently handles all things Web Design/Dev related for Colonial Pennsylvania Farmstead, a living history organization in Delaware County, and has been teaching music with School of Rock for a decade. UI/UX design and QoL for users is a major focus for Ian when creating apps—as a teacher, he knows the power of something that anyone can understand and start using just by looking at it. Ian graduated Magna Cum Laude from Westminster Choir College with a BM in Music/Theory Composition.</p>
-          <p>Skills: Typescript/Javascript, React, HTML + CSS, Styled Components, GraphQL, REST, Git.</p>
-          <p><a href='https//github.com/stuckinab0x'>https//github.com/stuckinab0x</a></p>
-        </Content>
-        <Highlight $color='white' style={ { top: highLightCoords[0], left: highLightCoords[1] } } />
-      </AboutMain>
-      <div  onClick={ close } />
-    </AboutContainer>
+    <Scroller>
+      <AboutContainer>
+        <AboutMain ref={ aboutMain }>
+          <Content>
+            <div>
+              <h1>About</h1>
+              <Close onClick={ close }>
+                <img src={ closeIcon } alt="" />
+              </Close>
+            </div>
+            <p>Ian is a Web Developer, Keyboard Teacher and Composer in southeastern PA. He currently handles all things Web Design/Dev related for Colonial Pennsylvania Farmstead, a living history organization in Delaware County, and has been teaching music with School of Rock for a decade. UI/UX design and QoL for users is a major focus for Ian when creating apps—as a teacher, he knows the power of something that anyone can understand and start using just by looking at it. Ian graduated Magna Cum Laude from Westminster Choir College with a BM in Music/Theory Composition.</p>
+            <p>Skills: Typescript/Javascript, React, HTML + CSS, Styled Components, GraphQL, REST, Git.</p>
+            <p><a href='https//github.com/stuckinab0x'>https//github.com/stuckinab0x</a></p>
+          </Content>
+          <Highlight $color='white' style={ { top: highLightCoords[0], left: highLightCoords[1] } } />
+        </AboutMain>
+        <div  onClick={ close } />
+      </AboutContainer>
+    </Scroller>
   )
 };
+
+const Scroller = styled.div`
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+  z-index: 100;
+`;
 
 const AboutContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-  z-index: 100;
+  height: 100%;
+  width: 100%;
+  min-height: max-content;
 
   > div:last-child {
     width: 100%;
@@ -59,13 +72,18 @@ const AboutContainer = styled.div`
 
 const AboutMain = styled.div`
   background-color: ${ props => props.theme.colors.contentInnerA };
+  margin: 10px 0;
   padding: 6px;
   width: 1000px;
-  height: 600px;
   overflow: hidden;
   position: relative;
   border-radius: 4px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  min-height: max-content;
+
+  @media only screen and (max-width: 1100px) {
+    width: 90%;
+  }
 `;
 
 const Content = styled.div`
@@ -107,6 +125,7 @@ const Content = styled.div`
 
     > a {
       color: white;
+      word-wrap: break-word;
     }
   }
 `;

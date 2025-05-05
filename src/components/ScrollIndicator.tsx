@@ -8,13 +8,16 @@ const ScrollIndicator: FC = () => (
   </ScrollIndicatorMain>
 )
 
+
+
 const ScrollIndicatorMain = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  height: 150px;
-  width: 1000px;
+  position: sticky;
+  margin-top: -150px;
+  min-height: 150px;
+  width: 100%;
   background: linear-gradient(rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0.8));
   bottom: 0;
   opacity: 0;

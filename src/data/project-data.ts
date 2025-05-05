@@ -30,7 +30,7 @@ const projectData: Project[] = [
     thumb: rehearsalManager,
     color: 'pink',
     techIcons: ['Docker', 'NodeJS', 'TypeScript', 'Vite'],
-    description: `A Android App made to help keep track of private music school rehearsals, with an accompanying 
+    description: `A Android App made to help keep track of music school rehearsals, with an accompanying 
 web app for easily casting shows and syncing data.`,
     allTechs: ['Azure Web Apps', 'Docker', 'ESLint', 'MongoDb', 'NodeJS', 'React Native', 'React Native', 'Styled Components', 'TypeScript', 'Vite'],
     gallery: [rehearsalManager, rehearsalManagerApp],

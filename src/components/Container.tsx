@@ -28,13 +28,15 @@ const Container: FC = () => {
 
   return (
     <ContainerMain>
-      <h1>Ian Barr/Web Developer</h1>
-      { !currentContent && <BubblesContainer>
+      { !currentContent && !showAbout && <>
+        <h1>Ian Barr/Web Developer</h1>
+        <BubblesContainer>
         { projectData.map(x => <Bubble key={ x.title } mouseX={ mousePos.x } mouseY={ mousePos.y }  project={ x } open={ (clockWiseBubbleCoords: number[]) => openModal(x, clockWiseBubbleCoords) } /> ) }
-      </BubblesContainer> }
+      </BubblesContainer>
+      <HomeAboutButtons mouseX={ mousePos.x } mouseY={ mousePos.y } openAbout={ () => setShowAbout(true) } />
+      </> }
       <Confetti currentColor={ showAbout ? 'white' : currentContent?.color } />
       { currentContent && <ContentModal close={ () => setCurrentContent(null) } ogSides={ currentBubbleOGSides } projectData={ currentContent } mouseX={ mousePos.x } mouseY={ mousePos.y }  /> }
-      <HomeAboutButtons mouseX={ mousePos.x } mouseY={ mousePos.y } openAbout={ () => setShowAbout(true) } />
       { showAbout && <About mouseX={ mousePos.x } mouseY={ mousePos.y } close={ () => setShowAbout(false) } /> }
     </ContainerMain>
   );
@@ -47,15 +49,22 @@ const ContainerMain = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
+  padding: 50px 0;
+  flex-grow: 1;
   background-color: ${ props => props.theme.colors.bgMain };
   background: radial-gradient(${ props => props.theme.colors.bgSecondary }, ${ props => props.theme.colors.bgMain });
 
   > h1 {
     color: white;
     font-size: 5rem;
+    text-align: center;
     margin: 0;
     text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
     z-index: 10;
+
+    @media only screen and (max-width: 910px) {
+      max-width: 800px;
+    }
   }
 `;
 

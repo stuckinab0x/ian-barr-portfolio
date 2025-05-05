@@ -3,8 +3,8 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
   #root {
     display: flex;
-    width: 100%;
-    height: 100%;
+    flex-direction: column;
+    min-height: 100vh;
 
     font-family: Urbanist, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -17,11 +17,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body, html {
-    margin: 0;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    min-height: 100vh;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
   }
 `;
 

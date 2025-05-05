@@ -10,8 +10,8 @@ const Gallery: FC<GalleryProps> = ({ images }) => {
 
   return (
     <GalleryMain>
-      { images.map(x => <ImageThumb onClick={ () => setCurrentImage(x) }><img key={ x } src={ x } /></ImageThumb>) }
-      { currentImage && <ImageModal onClick={ () => setCurrentImage('') }><img src={ currentImage } /></ImageModal> }
+      { images.map(x => <ImageThumb key={ x } onClick={ () => setCurrentImage(x) }><img key={ x } src={ x } /></ImageThumb>) }
+      { currentImage && <ImageModal onClick={ () => setCurrentImage('') }><div><img src={ currentImage } /></div></ImageModal> }
     </GalleryMain>
   )
 }
@@ -19,7 +19,6 @@ const Gallery: FC<GalleryProps> = ({ images }) => {
 const GalleryMain = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: left;
 `;
 
 const ImageThumb = styled.div`
@@ -34,6 +33,7 @@ const ImageThumb = styled.div`
   > img {
     height: 100%;
     opacity: 0.9;
+    user-select: none;
 
     &:hover {
       opacity: 1;
@@ -43,23 +43,35 @@ const ImageThumb = styled.div`
 `;
 
 const ImageModal = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
+ position: fixed;
+ top: 0;
+ left: 0;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ height: 100vh;
+ width: 100vw;
+ overflow-y: auto;
+ z-index: 1000;
+ background-color: rgba(0, 0, 0, 0.7);
+
+ > div {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  min-height: max-content;
+  box-sizing: border-box;
   padding: 20px;
-  z-index: 1000;
   cursor: pointer;
 
   > img {
-    height: 90%;
+    width: 90%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
   }
+ }
 `;
 
 export default Gallery;

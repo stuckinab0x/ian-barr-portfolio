@@ -31,12 +31,15 @@ const ContentModal: FC<ContentModalProps> = ({ close, projectData: { title, colo
       <div ref={ contentContainer }>
         <Content $accent={ color }>
           <ContentSection>
-            <div>
+            <TitleAndClose>
+              <ClosePaddle onClick={ close }>
+                Close
+              </ClosePaddle>
               <h1>{ title }</h1>
-              <Close onClick={ close }>
+              <CloseIcon onClick={ close }>
                 <img src={ closeIcon } alt="" />
-              </Close>
-            </div>
+              </CloseIcon>
+            </TitleAndClose>
             <TechIcons $accent={ color }>
               { techIcons.map(x => <img key={ x } src={ techIconImages.find(icon => icon.name === x)?.icon } />) }
             </TechIcons>
@@ -72,7 +75,10 @@ const ModalMain = styled.div`
   z-index: 100;
 
   > div:last-child {
-    position: fixed;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: ${ props => props.theme.colors.contentInnerA };
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
     top: 0;
@@ -84,6 +90,10 @@ const ModalMain = styled.div`
     padding: 0 8px;
     overflow: hidden;
     scrollbar-width: none;
+
+    @media only screen and (max-width: 1100px) {
+      width: 90%;
+    }
   }
 `;
 
@@ -105,7 +115,7 @@ const Content = styled.div<ContentStyleProps>`
   height: 100%;
   z-index: 10;
   box-sizing: border-box;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-width: none;
 
   container-type: scroll-state;
@@ -133,24 +143,11 @@ const ContentSection = styled.div`
 
   &:first-child {
     margin-top: -6px;
-
-    :first-child {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
   }
   
   h1, p {
     color: white;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-  }
-
-  h1 {
-    font-size: 4rem;
-    margin: 0;
-    box-sizing: border-box;
-    background-color: ${ props => props.theme.colors.contentInnerB };
   }
 
   p {
@@ -165,9 +162,33 @@ const ContentSection = styled.div`
   }
 `;
 
-const Close = styled.div`
-  width: 60x;
+const TitleAndClose = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > h1 {
+    font-size: 4rem;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: ${ props => props.theme.colors.contentInnerB };
+  }
+
+  @media only screen and (max-width: 880px) {
+    h1 {
+      font-size: 3rem;
+      width: 100%;
+    }
+
+    flex-direction: column;
+  }
+`;
+
+const CloseIcon = styled.div`
   height: 60px;
+  width: 60px;
+  min-width: 60px;
+  min-height: 60px;
   cursor: pointer;
   overflow: hidden;
   border-radius: 4px;
@@ -184,6 +205,35 @@ const Close = styled.div`
     width: 100%;
     height: 100%;
   }
+
+  @media only screen and (max-width: 880px) {
+    display: none;
+  }
+`;
+
+const ClosePaddle = styled.span`
+  display: none;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: ${ props => props.theme.colors.contentInnerB };
+  width: 100%;
+  margin: 10px 0;
+  padding: 4px;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.8);
+  text-align: center;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: 880px) {
+    display: flex;
+  }
 `;
 
 const TechIcons = styled.div<ContentStyleProps>`
@@ -197,6 +247,11 @@ const TechIcons = styled.div<ContentStyleProps>`
     width: 50px;
     height: 50px;
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+
+    @media only screen and (max-width: 880px) {
+      width: 35px;
+      height: 35px;
+    }
   }
 `;
 
