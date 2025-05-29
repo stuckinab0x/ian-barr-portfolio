@@ -1,29 +1,32 @@
 import Project from '../models/project';
-import farmstead from '../images/farmstead-main.png';
-import soundBoard from '../images/soundboard-main.jpg';
-import soundBoardAdmin from '../images/discord-admin.jpg';
-import rehearsalManager from '../images/rehearsal-manager-main.jpg';
-import rehearsalManagerApp from '../images/rehearsal-manager-app.jpg';
-import keyboardTools from '../images/keyboard-tools-main.jpg';
+import farmsteadMain from '../images/farmstead-main.png?w=1080&format=webp&imagetools';
+import farmsteadHours from '../images/farmstead-hours.png?w=720&format=webp&imagetools';
+import farmsteadEvents from '../images/farmstead-events.png?w=1080&format=webp&imagetools';
+import soundBoardMain from '../images/soundboard-main-new.png?w=1080&format=webp&imagetools';
+import soundBoardAdmin from '../images/soundboard-admin.png?w=1080&format=webp&imagetools';
+import soundBoardTagging from '../images/soundboard-tagging.png?w=1080&format=webp&imagetools';
+import rehearsalManager from '../images/rehearsal-manager-main.jpg?w=1080&format=webp&imagetools';
+import rehearsalManagerApp from '../images/rehearsal-manager-app.jpg?w=920&format=webp&imagetools';
+import keyboardTools from '../images/keyboard-tools-main.jpg?w=1080&format=webp&imagetools';
 
 const projectData: Project[] = [
   {
     title: 'Farmstead Historical Site',
-    thumb: farmstead,
+    thumb: farmsteadMain,
     color: 'orange',
     techIcons: ['Cloudflare', 'Gatsby', 'NodeJS', 'TypeScript'],
     description: 'The home page for Colonial Pennsylvania Farmstead, a living history organization in southeastern PA. Created with gatsby and includes a headless CMS backend for content updates. Deployed to Cloudflare Pages for unlimited free static hosting.',
     allTechs: ['Cloudflare Workers', 'ESLint', 'Gatsby', 'NodeJS', 'Styled Components', 'TypeScript'],
-    gallery: [farmstead],
+    gallery: [farmsteadMain, farmsteadHours, farmsteadEvents],
   },
   {
     title: 'DiscordSoundboardBot',
-    thumb: soundBoard,
+    thumb: soundBoardMain,
     color: 'aqua',
     techIcons: ['Docker', 'NodeJS', 'TypeScript', 'Vite'],
     description: 'A soundboard bot for Discord servers. In additional to conventional chat commands, it includes a UI with sound buttons, user favorites and tagging, sound previews, customizable user greeting sounds, and an admin panel.',
     allTechs: ['Azure Web Apps', 'Docker', 'ESLint', 'MongoDb', 'NodeJS', 'React', 'Styled Components', 'TypeScript', 'Vite'],
-    gallery: [soundBoard, soundBoardAdmin],
+    gallery: [soundBoardMain, soundBoardTagging, soundBoardAdmin],
   },
   {
     title: 'Rockhearsal Manager',
